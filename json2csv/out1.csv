@@ -1,0 +1,3 @@
+fxh_id,user_id,userCompanyId,user_email_id,tenantName,product,page,section,field,zycusLocale,zycusDateTime,zycusRating,zycusComment,tenantLocale,tenantDateTime,tenantRating,tenantComment
+spm_home_kpi_section-0fa88bcf-1923-4184-b01f-a14ae47b5a6a,0fa88bcf-1923-4184-b01f-a14ae47b5a6a,925e083c-99f3-40e7-908e-26549be45368,kapil.lmt@zycus.com,Eircom_QA,SPM,Home,kpi,test1,en_US,2020-02-13T07:23:15.453Z,1,Test comment,fr_FR,2020-02-13T07:15:56.259Z,1,Test comment
+spm_home_kpi_section-0fa88bcf-1923-4184-b01f-a14ae47b5a6a,0fa88bcf-1923-4184-b01f-a14ae47b5a6a,925e083c-99f3-40e7-908e-26549be45368,kapil.lmt@zycus.com,Eircom_QA,SPM,Home,kpi,test1,en_US,2020-02-13T07:23:15.453Z,1,Test comment,fr_FR,2020-02-13T07:24:37.607Z,3,Test comment
