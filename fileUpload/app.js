@@ -206,12 +206,11 @@ app.get("/decrypt", (req, res) => {
 app.get('/download', (req, res) => {
     try {
         console.log("download called");
-        const fileStream = fs.createReadStream(__dirname + '/imagePath/SampleJPGImage_20mbmb (1).jpg');
-        res.setHeader('Content-Type', mimeType.getType('./imagePath/SampleJPGImage_20mbmb (1).jpg'));
-        res.setHeader('Content-Disposition', `attachment; filename="SampleJPGImage_20mbmb (1).jpg"`);
-        res.setHeader('filename', 'SampleJPGImage_20mbmb (1).jpg');
-        res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition, filename, Content-Type');
-        // fileStream.pipe(fs.createWriteStream('./imagePath/write.jpg'));
+        const fileStream = fs.createReadStream('./imagePath/testImage.jpg');
+        res.setHeader('Content-Type', mimeType.getType('./imagePath/testImage.jpg'));
+        res.setHeader('Content-Disposition', `attachment; filename="testImage.jpg"`);
+        res.setHeader('filename', 'testImage.jpg');
+        res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition, filename, Content-Type')
         fileStream.pipe(res);
     } catch (error) {
         return res.send(error)
@@ -250,8 +249,18 @@ app.get('/downloadStreamThree', (req, res) => {
     }
 });
 
+app.get('/downloadWithoutStream', (req, res) => {
+    try {
+        const fileData = fs.readFileSync('./imagePath/testImage.jpg');
+        res.writeHead(200, { 'Content-Type': mimeType.getType('./imagePath/testImage.jpg'), 'Content-Disposition': `attachment; filename="testImage.jpg"` })
+        res.end(fileData)
+    } catch (error) {
+        return res.send(error)
+    }
+});
+
 app.post('/logging', (req, res)=>{
-    
+    return res.send("logging");
 })
 
 // Routing
