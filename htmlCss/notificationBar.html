@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <style>
+        .container{
+            padding: 1em
+        }
+        .notification-bar{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: relative;
+        }
+        .notification-bar li{
+            margin-top: 2em
+        }
+
+        .notification-bar li ion-icon{
+            width: 2em;
+            height: 2em;
+            display: block;
+            text-align: center;
+            line-height: 1em;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            background-color: white;
+        }
+        .notification-bar li div{
+            margin-left: 4em;
+            margin-top: -2.75em;
+            border: 1px solid #ddd;
+            padding: 1em;
+            background-color:white;
+        }
+        .notification-bar li:before{
+            content: '';
+            width: 5em;
+            height: 0.02em;
+            background-color: #ddd;
+            position: absolute;
+            margin-top: 1em;
+            z-index: -1;
+        } 
+        .notification-bar:after{
+            content:'';
+            width: 0.05em;
+            height: 100%;   
+            background-color: #ddd;    
+            position: absolute;     
+            top: 0;
+            left: 1em;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul class="notification-bar">
+            <li>
+                <ion-icon name="heart"></ion-icon>
+                <div>Third Notification</div>
+            </li>
+            <li>
+                <ion-icon name="aperture-outline"></ion-icon>
+                <div>Second Notification</div>
+            </li>
+            <li>
+                <ion-icon name="cog-outline"></ion-icon>
+                <div>First Notification</div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
