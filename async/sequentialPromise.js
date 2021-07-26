@@ -26,16 +26,14 @@ let startTimer = Date.now();
     for(let file of files){
         contents.push(await loadFile(file));
     }
-    console.log('forOf ', contents);
+    console.log('async/ forof ', contents);
     let endTimer = Date.now();
-    console.log(`async ${(endTimer-startTimer)/1000} secs`);
+    console.log(`async/ forof ${(endTimer-startTimer)/1000} secs`);
 })();
 
 //parallel execution with map and promise.all
-const allContents = files.map(file=>{
-    return loadFile(file);
-})
-Promise.all(allContents).then(result=>{
+const allPromises = files.map(file=>loadFile(file));
+Promise.all(allPromises).then(result=>{
     console.log("map and promise all ", result);
     let endTimer = Date.now();
     console.log(`map ${(endTimer-startTimer)/1000} secs`);
@@ -59,3 +57,13 @@ currentPromise.then(result=>{
 
 
 //sequential execution with reduce
+files.reduce((previousPromise, file)=>{
+    return previousPromise.then(allContents=>{
+        return loadFile(file).then(content=>{
+            allContents.push(content);
+            return allContents;
+        })
+    })
+}, Promise.resolve([])).then(result=>{
+    console.log('reduce ', result);
+});

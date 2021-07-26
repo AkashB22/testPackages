@@ -23,13 +23,14 @@ i18n.configure({
 
 app.use(i18n.init);
 
-app.use(cors({
-    origin: 'http://localhost:3001',
-    credentials: true,
-    exposedHeaders: ['Content-Type', 'Content-Disposition', 'filename']
-}));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(cors({
+//     origin: 'http://localhost:3001',
+//     credentials: true,
+//     exposedHeaders: ['Content-Type', 'Content-Disposition', 'filename']
+// }));
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.post('/submit-form', (req, res) => {
     console.log("called");
     const x = request.post("http://localhost:3001/products/upload", (err, result) => {
@@ -112,23 +113,23 @@ app.post('/upload', (req, res) => {
         console.log("upload api called");
         const form = formidable({ multiples: true, uploadDir: "./imagePath" });
 
-        form.on('fileBegin', function(name, file) {
+        form.on('fileBegin', function (name, file) {
             //rename the incoming file to the file's name
             const fileName = (file.name !== "" || file.name !== null) ? file.name : name || "default";
             file.path = form.uploadDir + "/" + fileName;
         })
 
-        form.on('error', function(err) {
+        form.on('error', function (err) {
             console.log("an error has occured with form upload");
             console.log(err);
             // request.resume();
         });
 
-        form.on('aborted', function(err) {
+        form.on('aborted', function (err) {
             console.log("user aborted upload");
         });
 
-        form.on('end', function() {
+        form.on('end', function () {
             console.log('-> upload done');
         });
         form.parse(req, (error, fields, files) => {
@@ -147,27 +148,27 @@ app.post("/encrypt", (req, res) => {
         console.log("api called");
         const form = formidable({ multiples: true, uploadDir: path.join(`${__dirname}/imagePath`) });
 
-        form.on('fileBegin', function(name, file) {
+        form.on('fileBegin', function (name, file) {
             //rename the incoming file to the file's name
             const fileName = (file.name !== "" || file.name !== null) ? file.name : name || "default";
             file.path = form.uploadDir + "/" + fileName;
         })
 
         form.onPart = (part) => {
-            if(part.mime){
+            if (part.mime) {
                 const stream = fs.createWriteStream(path.join(`${__dirname}/encoded/${part.filename}`));
                 req.filename = part.filename;
-                part.on('data', (buffer)=> {
+                part.on('data', (buffer) => {
                     const cipher = crypto.createCipheriv('aes256', "qwertyuiopasdfghqwertyuiopasdfgh", "qwertyuiopasdfgh");
                     let encrypted = cipher.update(buffer);
                     encrypted = Buffer.concat([encrypted, cipher.final()])
                     stream.write(encrypted);
                 });
-                part.on('end', ()=>{
+                part.on('end', () => {
                     stream.end();
                     console.log("file encryption done");
                 });
-            } else{
+            } else {
                 form.handlePart(part);
             }
         };
@@ -190,12 +191,12 @@ app.post("/encrypt", (req, res) => {
         return res.send(error)
     }
 });
-  
+
 app.get("/decrypt", (req, res) => {
     const filename = req.headers['filename'] || "(4).jpg"
     const readStream = fs.createReadStream(path.join(`${__dirname}/encoded/${filename}`)),
-    // writeStream = fs.createWriteStream(path.join(`${__dirname}/encoded/${files['file'].name}`)),
-    decipher = crypto.createDecipheriv('aes256', "qwertyuiopasdfghqwertyuiopasdfgh", "qwertyuiopasdfgh");
+        // writeStream = fs.createWriteStream(path.join(`${__dirname}/encoded/${files['file'].name}`)),
+        decipher = crypto.createDecipheriv('aes256', "qwertyuiopasdfghqwertyuiopasdfgh", "qwertyuiopasdfgh");
     res.setHeader('Content-Type', mimeType.getType(`./imagePath/${filename}`));
     res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
     res.setHeader('filename', `${filename}`);
@@ -234,7 +235,7 @@ app.get('/downloadStreamOne', (req, res) => {
 app.get('/downloadStreamTwo', (req, res) => {
     try {
         console.log("download without stream one called");
-        res.sendFile(path.join(__dirname , './imagePath/SampleJPGImage_20mbmb (1).jpg'));
+        res.sendFile(path.join(__dirname, './imagePath/SampleJPGImage_20mbmb (1).jpg'));
     } catch (error) {
         return res.send(error)
     }
@@ -243,7 +244,7 @@ app.get('/downloadStreamTwo', (req, res) => {
 app.get('/downloadStreamThree', (req, res) => {
     try {
         console.log("download without stream one called");
-        res.download(path.join(__dirname , './imagePath/SampleJPGImage_20mbmb (1).jpg'));
+        res.download(path.join(__dirname, './imagePath/SampleJPGImage_20mbmb (1).jpg'));
     } catch (error) {
         return res.send(error)
     }
@@ -258,10 +259,6 @@ app.get('/downloadWithoutStream', (req, res) => {
         return res.send(error)
     }
 });
-
-app.post('/logging', (req, res)=>{
-    return res.send("logging");
-})
 
 // Routing
 // app.post('/scan-file', async(req, res) => {

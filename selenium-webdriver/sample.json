@@ -1,0 +1,967 @@
+{
+  "info": {
+    "title": "Dewdrops BFF API Listing",
+    "version": "1.0.0",
+    "description": "Demonstrating to describe a RESTful API"
+  },
+  "basePath": "/api",
+  "swagger": "2.0",
+  "paths": {
+    "/a/isupplier/addresses/addresslist": {
+      "post": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get the address list",
+        "operationId": "a_isupplier_addresses_addresslist_post",
+        "description": "Get the address list",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Get the address list based on supplier ID.",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "supplierIDs": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "required": [
+                "supplierIDs"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/facilities/userFacility": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get User Level Facility List",
+        "operationId": "a_isupplier_facilities_userFacility_get",
+        "description": "Fetch all the facilities applicable to the user",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/facilities/businessLocations": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get User Facility List",
+        "operationId": "a_isupplier_facilities_businessLocations_get",
+        "description": "Fetch all the facilities applicable to the tenant",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/facilities/plantList": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get Plant List",
+        "operationId": "a_isupplier_facilities_plantList_get",
+        "description": "Fetch all Plant List applicable to the tenant",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/list": {
+      "post": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Fetches Request List from SIM",
+        "operationId": "a_isupplier_requests_list_post",
+        "description": "Fetch Request List based on search criteria",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Fetches Request List(based on search criteria & pagination).",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/pagination"
+                },
+                {
+                  "$ref": "#/definitions/criteriaGroup"
+                },
+                {
+                  "$ref": "#/definitions/sort"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/notifiySupplierList": {
+      "post": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Fetches Email List from SIM",
+        "operationId": "a_isupplier_requests_notifiySupplierList_post",
+        "description": "Fetch Email List based on search criteria",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Fetches Request List(based on search criteria & pagination).",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "requetId": {
+                  "type": "string"
+                },
+                "supplierName": {
+                  "type": "string"
+                },
+                "gsId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "requetId",
+                "supplierName",
+                "gsId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/{requestId}/auditLog": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Fetches Email List from SIM",
+        "operationId": "a_isupplier_requests_{requestId}_auditLog_get",
+        "description": "Fetch Email List based on search criteria",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestId",
+            "description": "Fetches Request List(based on search criteria & pagination).",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/{requestId}/fetchRequestDelegatee": {
+      "post": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Request to fetch delegator",
+        "operationId": "a_isupplier_requests_{requestId}_fetchRequestDelegatee_post",
+        "description": "Request to fetch delegator",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestId",
+            "description": "Id of request",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "body",
+            "description": "Fetches Request List(based on search criteria & pagination).",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "roleId": {
+                  "type": "number",
+                  "required": true
+                },
+                "delegatorUserId": {
+                  "type": "number",
+                  "required": true
+                },
+                "onBehalfOfUserId": {
+                  "type": "number",
+                  "required": true
+                },
+                "plantId": {
+                  "type": "number",
+                  "required": true
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/{requestId}/{roleId}/fetchRequestDelegator": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Request to fetch delegator",
+        "operationId": "a_isupplier_requests_{requestId}_{roleId}_fetchRequestDelegator_get",
+        "description": "Request to fetch delegator",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestId",
+            "description": "Id of request",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "roleId",
+            "description": "Id of role",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/getArchivedRequest": {
+      "post": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Request to fetch Archived",
+        "operationId": "a_isupplier_requests_getArchivedRequest_post",
+        "description": "Request to fetch Archived",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/fetchDelegateeRole": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get Delegatee Roles",
+        "operationId": "a_isupplier_requests_fetchDelegateeRole_get",
+        "description": "Fetch the roles of the delegatee",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/{requestId}/{userId}/getOnBehalfOfUsers": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get on Behalf of users",
+        "operationId": "a_isupplier_requests_{requestId}_{userId}_getOnBehalfOfUsers_get",
+        "description": "Fetch the onBehalfOfusers based on userId and requestId",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/{requestId}/getBlackListData": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Request to fetch custom blacklist data",
+        "operationId": "a_isupplier_requests_{requestId}_getBlackListData_get",
+        "description": "Request to fetch custom blacklist data",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestId",
+            "description": "Id of request",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/getPreQualificationStatus": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get an supplier getPreQualificationStatus",
+        "operationId": "a_isupplier_requests_getPreQualificationStatus_get",
+        "description": "Get an supplier getPreQualificationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/deleteRequest": {
+      "post": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Request to fetch delegator",
+        "operationId": "a_isupplier_requests_deleteRequest_post",
+        "description": "Request to fetch delegator",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Delete request.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "requestIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "required": true
+                },
+                "tmsUserId": {
+                  "type": "string",
+                  "required": true
+                },
+                "comments": {
+                  "type": "string",
+                  "required": true
+                },
+                "requestorEmail": {
+                  "type": "boolean"
+                },
+                "approverEmail": {
+                  "type": "boolean"
+                },
+                "suppContactEmail": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/requests/getFlexiformDetails": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get an supplier getFlexiformDetails",
+        "operationId": "a_isupplier_requests_getFlexiformDetails_get",
+        "description": "Get an supplier getFlexiformDetails",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/suppliers/list": {
+      "post": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Fetches Supplier List from SIM",
+        "operationId": "a_isupplier_suppliers_list_post",
+        "description": "Fetch Supplier List based on search criteria",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Fetches Operational Supplier List(based on search criteria & pagination).",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/pagination"
+                },
+                {
+                  "$ref": "#/definitions/criteriaGroup"
+                },
+                {
+                  "$ref": "#/definitions/sort"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/suppliers/watch": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Fetch List of Suppliers which are under observation",
+        "operationId": "a_isupplier_suppliers_watch_get",
+        "description": "Fetch List of Suppliers which are under observation",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/suppliers/{supplier_Id}/getDetails": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get an supplier Details",
+        "operationId": "a_isupplier_suppliers_{supplier_Id}_getDetails_get",
+        "description": "Get an supplier Details",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "supplier_Id",
+            "description": "Provide an supplier ID.",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/suppliers/getCategories": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get an supplier getCategories",
+        "operationId": "a_isupplier_suppliers_getCategories_get",
+        "description": "Get an supplier getCategories",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/suppliers/{categoryId}/getSupplierDetails": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get an supplier Details",
+        "operationId": "a_isupplier_suppliers_{categoryId}_getSupplierDetails_get",
+        "description": "Get an supplier Details",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "description": "Provide an supplier ID.",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/suppliers/getExternalServiceProviders": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get an supplier getExternalServiceProviders",
+        "operationId": "a_isupplier_suppliers_getExternalServiceProviders_get",
+        "description": "Get an supplier getExternalServiceProviders",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/suppliers/{displayGsid}/getRiskInfo": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get an supplier getRiskInfo",
+        "operationId": "a_isupplier_suppliers_{displayGsid}_getRiskInfo_get",
+        "description": "Get an supplier getRiskInfo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "displayGsid",
+            "description": "Provide an displayGsid.",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/suppliers/{displayGsid}/getAssessmentStatus": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get an supplier getAssessmentStatus",
+        "operationId": "a_isupplier_suppliers_{displayGsid}_getAssessmentStatus_get",
+        "description": "Get an supplier getAssessmentStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "displayGsid",
+            "description": "Provide an displayGsid.",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/suppliers/{zycusSupplierId}/{supplierType}/get_iRiskUrl": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get an supplier get_iRiskUrl",
+        "operationId": "a_isupplier_suppliers_{zycusSupplierId}_{supplierType}_get_iRiskUrl_get",
+        "description": "Get an supplier get_iRiskUrl",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "zycusSupplierId",
+            "description": "Provide an zycusSupplierId.",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "supplierType",
+            "description": "Provide an supplierType.",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/a/isupplier/suppliers/{zycusSupplierId}/{supplierType}/get_iRiskScores": {
+      "get": {
+        "tags": [
+          "ISupplier API"
+        ],
+        "summary": "Get an supplier get_iRiskScores",
+        "operationId": "a_isupplier_suppliers_{zycusSupplierId}_{supplierType}_get_iRiskScores_get",
+        "description": "Get an supplier get_iRiskScores",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "zycusSupplierId",
+            "description": "Provide an zycusSupplierId.",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "supplierType",
+            "description": "Provide an supplierType.",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "pagination": {
+      "properties": {
+        "perPageRecords": {
+          "type": "integer"
+        },
+        "pageNo": {
+          "type": "integer"
+        }
+      },
+      "title": "pagination"
+    },
+    "sort": {
+      "properties": {
+        "sorts": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fieldName": {
+                  "type": "string"
+                },
+                "direction": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "title": "sort"
+    },
+    "criteria": {
+      "type": "object",
+      "properties": {
+        "fieldName": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "minValue": {
+          "type": "integer"
+        },
+        "maxValue": {
+          "type": "integer"
+        },
+        "multivalue": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "criteria"
+    },
+    "criteriaGroupArray": {
+      "type": "object",
+      "properties": {
+        "logicalOperator": {
+          "type": "string"
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/criteria"
+          }
+        }
+      },
+      "title": "criteriaGroupArray"
+    },
+    "criteriaGroup": {
+      "type": "object",
+      "properties": {
+        "criteriaGroup": {
+          "type": "object",
+          "properties": {
+            "logicalOperator": {
+              "type": "string"
+            },
+            "criteria": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/criteria"
+              }
+            }
+          }
+        }
+      },
+      "title": "criteriaGroup"
+    },
+    "criteriaGroupWithArray": {
+      "type": "object",
+      "properties": {
+        "criteriaGroup": {
+          "type": "object",
+          "properties": {
+            "logicalOperator": {
+              "type": "string"
+            },
+            "criteria": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/criteria"
+              }
+            },
+            "criteriaGroup": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/criteriaGroupArray"
+              }
+            }
+          }
+        }
+      },
+      "title": "criteriaGroupWithArray"
+    },
+    "idArray": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "ids"
+      ],
+      "title": "idArray"
+    },
+    "params": {
+      "properties": {
+        "masterType": {
+          "type": "string"
+        },
+        "masterInfo": {
+          "type": "string"
+        }
+      },
+      "title": "params"
+    }
+  },
+  "responses": {},
+  "parameters": {},
+  "tags": []
+}

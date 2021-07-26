@@ -38,8 +38,10 @@
     "lodash": "^4.17.20",
     "mime": "^2.5.2",
     "node-static": "^0.7.11",
+    "nodemailer": "^6.6.2",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
+    "selenium-webdriver": "^4.0.0-beta.4",
     "sinon": "^9.2.0",
     "socket.io": "^3.0.4",
     "socket.io-client": "^3.0.4",
@@ -52,7 +54,7 @@
   "devDependencies": {
     "@cypress/code-coverage": "^3.8.5",
     "chai": "^4.2.0",
-    "mocha": "^8.2.0",
+    "mocha": "^8.4.0",
     "nock": "^13.0.4",
     "nyc": "^15.1.0"
   },
