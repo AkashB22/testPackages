@@ -8,15 +8,15 @@ async function main() {
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
-    host: "automail.zycus.com",
+    host: "hostname",
     port: 25,
     secure: false, // true for 465, false for other ports
   });
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: 'akash.b@zycus.com', // sender address
-    to: "akash.b@zycus.com", // list of receivers
+    from: 'fromEmail', // sender address
+    to: "toEmail", // list of receivers
     subject: "Hello ✔", // Subject line
     text: "Hello world?", // plain text body
     html: "<b>Hello world?</b>", // html body
